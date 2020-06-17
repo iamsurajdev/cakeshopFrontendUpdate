@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
+import BaseComponent from "../../BaseComponent/BaseComponent";
+// import { GoogleLogin } from "react-google-login";
+// import FacebookLogin from "react-facebook-login";
 
 const Login = (props) => {
   const [user, setUser] = useState({
@@ -24,8 +27,15 @@ const Login = (props) => {
     setUser({ ...user, [name]: event.target.value });
   };
 
+  // const responseGoogle = (response) => {
+  //   console.log(response);
+  // };
+  // const responseFacebook = (response) => {
+  //   console.log(response);
+  // };
+
   return (
-    <div>
+    <BaseComponent>
       {props.authError && <p>{props.authError}</p>}
       <form onSubmit={onSubmitHandler}>
         <input
@@ -40,7 +50,22 @@ const Login = (props) => {
         />
         <button>Login</button>
       </form>
-    </div>
+      {/* for future */}
+      {/* <GoogleLogin
+        clientId=""
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
+      <FacebookLogin
+        appId=""
+        autoLoad={true}
+        fields="name,email,picture"
+        callback={responseFacebook}
+        onClick={responseFacebook}
+      /> */}
+    </BaseComponent>
   );
 };
 

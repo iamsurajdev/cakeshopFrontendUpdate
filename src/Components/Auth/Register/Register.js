@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
-
+import BaseComponent from "../../BaseComponent/BaseComponent";
 const Register = (props) => {
   //local state for store the event before sending to redux
   const [user, setUser] = useState({
@@ -27,7 +27,7 @@ const Register = (props) => {
   };
 
   return (
-    <div>
+    <BaseComponent>
       {props.authError && <p>{props.authError}</p>}
       <form onSubmit={onSubmitHandler}>
         <input
@@ -47,7 +47,7 @@ const Register = (props) => {
         />
         <button>Register</button>
       </form>
-    </div>
+    </BaseComponent>
   );
 };
 

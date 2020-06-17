@@ -1,0 +1,25 @@
+.header {
+  height: 100px;
+  width: 100%;
+  background-color: #d8c1b9;
+}
+
+.navigation {
+  width: 60%;
+  margin: auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.navItem a {
+  color: white;
+  text-decoration: none;
+}
+.navItem a:hover {
+  color: rgb(66, 117, 184);
+}
+.navItem {
+  list-style: none;
+  margin: 0px 5px;
+}

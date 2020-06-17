@@ -1,16 +1,20 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Route, withRouter, Redirect } from "react-router-dom";
-import Home from "./Components/home/Home";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import Home from "./Components/Home/Home";
 import Login from "./Components/Auth/Login/Login";
 import Register from "./Components/Auth/Register/Register";
+import Allproducts from "./Components/Allproducts/Allproducts";
 
 const Router = (props) => {
   return (
     <BrowserRouter>
-      <Route path="/" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/register" exact component={Register} />
+        <Route path="/products" exact component={Allproducts} />
+      </Switch>
     </BrowserRouter>
   );
 };

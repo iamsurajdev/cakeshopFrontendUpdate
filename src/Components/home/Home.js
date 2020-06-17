@@ -1,34 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Header from "../Header/Header";
-import { connect } from "react-redux";
-import * as action from "../../Redux/Actions/index";
+import BaseComponent from "../BaseComponent/BaseComponent";
+import image from "../../Assets/Images/cake-baby.jpg";
+import classes from "./Home.module.css";
 
 const Home = (props) => {
-  const logoutHelper = () => {
-    localStorage.clear();
-    props.isAuthenticatedCheck();
-  };
-
   return (
-    <div>
-      <Header />
-      <button>
-        <Link to="/register">Register</Link>
-      </button>
-      <button>
-        <Link to="/login">Login</Link>
-      </button>
-
-      <button onClick={logoutHelper}>Logout</button>
-    </div>
+    <BaseComponent>
+      <div className={classes.home}>
+        <img className={classes.image} src={image} alt="flower" />
+        <div className={classes.heading}>
+          <h1>Kazel Cakes</h1>
+        </div>
+      </div>
+    </BaseComponent>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isAuthenticatedCheck: () => dispatch(action.checkAuthStatus()),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Home);
+export default Home;

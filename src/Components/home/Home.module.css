@@ -1,0 +1,35 @@
+.image {
+  top: 0;
+  width: 100%;
+  opacity: 0.7;
+  z-index: -5;
+  position: inherit;
+}
+.home {
+  text-align: center;
+}
+
+.heading {
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  top: 150px;
+}
+.heading h1 {
+  font-size: 60px;
+}
+
+@keyframes yourAnimation {
+  0% {
+    transform: scale(0.5) translateY(-30%);
+    opacity: 0.5;
+  }
+  89% {
+    transform: rotate(xx) scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.elementToAnimate {
+  animation: yourAnimation 0.5s infinite 0s linear;
+}

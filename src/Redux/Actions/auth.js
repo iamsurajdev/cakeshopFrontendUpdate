@@ -66,21 +66,6 @@ export const auth = (name, email, password) => {
   };
 };
 
-export const googleAuth = (data) => {
-  return (dispatch) => {
-    axios
-      .post("/oauth/google", {
-        access_token: data,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
-
 export const authStatus = (status) => {
   return {
     type: actionTypes.AUTH_STATUS,
