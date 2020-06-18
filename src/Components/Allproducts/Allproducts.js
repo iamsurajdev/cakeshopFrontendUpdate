@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import * as action from "../../Redux/Actions/index";
 import Spinner from "../UI/Spinner/Spinner";
 import BaseComponent from "../BaseComponent/BaseComponent";
+import Card from "../UI/Card/Card";
 
+import classes from "./Allproducts.module.css";
 const Allproducts = (props) => {
   const getProductsHelper = () => {
     props.getProducts();
@@ -14,16 +16,18 @@ const Allproducts = (props) => {
 
   let view = <Spinner />;
   if (props.product) {
-    view = props.product.map((prod) => (
-      <ul key={prod.id}>
-        <li>Name {prod.name}</li>
-        <li>Description {prod.description}</li>
-        <li>Price $ {prod.price}</li>
-      </ul>
+    view = props.product.map((prod, index) => (
+      <div key={index}>
+        <Card product={prod} />
+      </div>
     ));
   }
 
-  return <BaseComponent>{view}</BaseComponent>;
+  return (
+    <BaseComponent>
+      <div className={classes.allProducts}>{view}</div>
+    </BaseComponent>
+  );
 };
 
 const mapStateToProps = (state) => {

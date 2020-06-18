@@ -33,7 +33,7 @@ export const productFetch = () => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch(productFetchFail(err.response.data.error));
+        dispatch(productFetchFail(err));
       });
   };
 };
