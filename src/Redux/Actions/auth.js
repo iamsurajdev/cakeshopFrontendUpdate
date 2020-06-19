@@ -7,10 +7,13 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (user) => {
+export const authSuccess = (id, role, name, email) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    user: user,
+    id: id,
+    role: role,
+    name: name,
+    email: email,
   };
 };
 
@@ -51,12 +54,55 @@ export const auth = (name, email, password) => {
           if (response.data.error) {
             dispatch(authFail(response.data.error));
           } else {
-            dispatch(authSuccess(response.data));
+            dispatch(
+              authSuccess(
+                response.data._id,
+                response.data.role,
+                response.data.name,
+                response.data.email
+              )
+            );
           }
         }
 
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.id);
+        dispatch(checkAuthStatus());
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(authFail(err));
+      });
+  };
+};
+export const fetchUserIfLoggedIn = (id, token) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    axios
+      .get(`/user/${id}`, {
+        headers: {
+          token: token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.msg) {
+          dispatch(authFail(response.data.msg));
+        } else {
+          if (response.data.error) {
+            dispatch(authFail(response.data.error));
+          } else {
+            dispatch(
+              authSuccess(
+                response.data._id,
+                response.data.role,
+                response.data.name,
+                response.data.local.email
+              )
+            );
+          }
+        }
+
         dispatch(checkAuthStatus());
       })
       .catch((err) => {

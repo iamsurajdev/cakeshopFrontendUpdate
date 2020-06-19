@@ -5,7 +5,17 @@ import * as action from "./Redux/Actions/index";
 
 class App extends Component {
   componentDidMount() {
-    this.props.isAuthenticatedCheck();
+    this.initialize();
+  }
+
+  initialize() {
+    console.log("initialize executed");
+
+    if (localStorage.getItem("userId") && localStorage.getItem("token")) {
+      let userId = localStorage.getItem("userId");
+      let token = localStorage.getItem("token");
+      this.props.storeUserIfLoggedIn(userId, token);
+    }
   }
 
   render() {
@@ -16,6 +26,8 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     isAuthenticatedCheck: () => dispatch(action.checkAuthStatus()),
+    storeUserIfLoggedIn: (id, token) =>
+      dispatch(action.fetchUserIfLoggedIn(id, token)),
   };
 };
 

@@ -2,7 +2,12 @@ import * as actionType from "../Actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  user: {},
+  user: {
+    id: "",
+    role: "",
+    name: "",
+    email: "",
+  },
   error: null,
   isAuthenticated: false,
 };
@@ -13,8 +18,15 @@ const authStart = (state, action) => {
   });
 };
 const authSuccess = (state, action) => {
+  console.log(action);
+  const newUser = updateObject(state.user, {
+    id: action.id,
+    role: action.role,
+    name: action.name,
+    email: action.email,
+  });
   return updateObject(state, {
-    user: action.user,
+    user: newUser,
     error: null,
   });
 };
