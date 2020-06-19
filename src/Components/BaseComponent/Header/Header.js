@@ -19,6 +19,9 @@ const Header = (props) => {
           <Link to="/products">Products</Link>
         </li>
         <li className={classes.navItem}>
+          <Link to="/cart">Cart</Link>
+        </li>
+        <li className={classes.navItem}>
           <Link to="/register">Register</Link>
         </li>
         <li className={classes.navItem}>

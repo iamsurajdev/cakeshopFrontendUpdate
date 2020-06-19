@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { loadCart } from "./CartHelper/CartHelper";
 import BaseComponent from "../BaseComponent/BaseComponent";
+import { connect } from "react-redux";
+import Card from "../UI/Card/Card";
 
-const Cart = () => {
-  const [products, setProducts] = useState([]);
+const Cart = (props) => {
+  const [products, setProducts] = useState([0]);
 
   useEffect(() => {
     setProducts(loadCart());
-  }, [reload]);
+  }, [props.reload]);
 
   const loadAllProducts = () => {
     return (
@@ -29,13 +31,15 @@ const Cart = () => {
 
   return (
     <BaseComponent>
-      {products.length > 0 ? (
-        loadAllProducts(products)
-      ) : (
-        <h3>No products found</h3>
-      )}
+      {products.length > 0 ? loadAllProducts() : <h3>No products found</h3>}
     </BaseComponent>
   );
 };
 
-export default Cart;
+const mapStateToProps = (state) => {
+  return {
+    reload: state.cart.reload,
+  };
+};
+
+export default connect(mapStateToProps)(Cart);

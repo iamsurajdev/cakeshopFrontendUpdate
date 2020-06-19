@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Card.module.css";
 import ImageHelper from "./ImageHelper/ImageHelper";
+import * as action from "../../../Redux/Actions/index";
 import {
   addItemToCart,
   removeItemFromCart,
@@ -26,6 +27,7 @@ const Card = (props) => {
         <button
           onClick={() => {
             removeItemFromCart(props.product._id);
+            props.onRemoveItemReload();
           }}
         >
           Remove from cart
@@ -59,4 +61,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Card);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onRemoveItemReload: () => dispatch(action.reloadCart()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
