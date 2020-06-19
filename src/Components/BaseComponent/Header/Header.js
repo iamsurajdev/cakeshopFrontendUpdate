@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logout from "../../Auth/Logout/Logout";
 import classes from "./Header.module.css";
-const Header = () => {
+import { connect } from "react-redux";
+import * as action from "../../../Redux/Actions/index";
+
+const Header = (props) => {
+  const logoutHelper = () => {
+    localStorage.clear();
+    props.isAuthenticatedCheck();
+  };
   return (
     <div className={classes.header}>
       <nav className={classes.navigation}>
@@ -19,11 +25,17 @@ const Header = () => {
           <Link to="/login">Login</Link>
         </li>
         <li className={classes.navItem}>
-          <Logout />
+          <a onClick={logoutHelper}>Logout</a>
         </li>
       </nav>
     </div>
   );
 };
 
-export default Header;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    isAuthenticatedCheck: () => dispatch(action.checkAuthStatus()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Header);

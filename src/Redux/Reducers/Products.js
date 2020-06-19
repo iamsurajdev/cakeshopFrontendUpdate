@@ -11,6 +11,11 @@ const productFetchStart = (state, action) => {
     error: null,
   });
 };
+const productFetchNotNeeded = (state, action) => {
+  return updateObject(state, {
+    error: null,
+  });
+};
 const productFetchSuccess = (state, action) => {
   return updateObject(state, {
     products: state.products.concat(action.product),
@@ -30,6 +35,8 @@ const reducer = (state = initialState, action) => {
       return productFetchSuccess(state, action);
     case actionType.PRODUCT_FETCH_FAIL:
       return productFetchFail(state, action);
+    case actionType.PRODUCT_FETCH_NOT_NEEDED:
+      return productFetchNotNeeded(state, action);
     default:
       return state;
   }

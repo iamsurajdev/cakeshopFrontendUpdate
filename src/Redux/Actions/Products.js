@@ -21,19 +21,29 @@ export const productFetchFail = (error) => {
   };
 };
 
-export const productFetch = () => {
+export const productFetchNotNeeded = () => {
+  return {
+    type: actionTypes.PRODUCT_FETCH_NOT_NEEDED,
+  };
+};
+
+export const productFetch = (product) => {
   return (dispatch) => {
     dispatch(productFetchStart());
-    axios
-      .get("/products")
-      .then((response) => {
-        console.log(response);
+    if (product.length > 0) {
+      dispatch(productFetchNotNeeded());
+    } else {
+      axios
+        .get("/products")
+        .then((response) => {
+          console.log(response);
 
-        dispatch(productFetchSuccess(response.data));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(productFetchFail(err));
-      });
+          dispatch(productFetchSuccess(response.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(productFetchFail(err));
+        });
+    }
   };
 };

@@ -8,7 +8,7 @@ import Card from "../UI/Card/Card";
 import classes from "./Allproducts.module.css";
 const Allproducts = (props) => {
   const getProductsHelper = () => {
-    props.getProducts();
+    props.getProducts(props.product);
   };
   useEffect(() => {
     getProductsHelper();
@@ -18,7 +18,7 @@ const Allproducts = (props) => {
   if (props.product) {
     view = props.product.map((prod, index) => (
       <div key={index}>
-        <Card product={prod} />
+        <Card product={prod} addtoCart={true} removeFromCart={false} />
       </div>
     ));
   }
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProducts: () => dispatch(action.productFetch()),
+    getProducts: (product) => dispatch(action.productFetch(product)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Allproducts);
