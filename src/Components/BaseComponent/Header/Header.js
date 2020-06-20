@@ -25,13 +25,13 @@ const Header = (props) => {
         )}
         {props.isAuthenticated && props.role > 0 && (
           <li className={classes.navItem}>
-            <Link to="/adminDashboard">Admin Dashboard</Link>
+            <Link to="/admin/dashboard">Admin Dashboard</Link>
           </li>
         )}
 
         {props.isAuthenticated && (
           <li className={classes.navItem}>
-            <Link to="/userDashboard">User Dashboard</Link>
+            <Link to="/user/dashboard">User Dashboard</Link>
           </li>
         )}
         {!props.isAuthenticated && (
