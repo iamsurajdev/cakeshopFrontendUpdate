@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Router from "./Router";
+import Router from "./Router/Router";
 import { connect } from "react-redux";
 import * as action from "./Redux/Actions/index";
 

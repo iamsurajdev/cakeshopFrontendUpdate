@@ -18,27 +18,53 @@ const Header = (props) => {
         <li className={classes.navItem}>
           <Link to="/products">Products</Link>
         </li>
-        <li className={classes.navItem}>
-          <Link to="/cart">Cart</Link>
-        </li>
-        <li className={classes.navItem}>
-          <Link to="/register">Register</Link>
-        </li>
-        <li className={classes.navItem}>
-          <Link to="/login">Login</Link>
-        </li>
-        <li className={classes.navItem}>
-          <a onClick={logoutHelper}>Logout</a>
-        </li>
+        {props.isAuthenticated && (
+          <li className={classes.navItem}>
+            <Link to="/cart">Cart</Link>
+          </li>
+        )}
+        {props.isAuthenticated && props.role > 0 && (
+          <li className={classes.navItem}>
+            <Link to="/adminDashboard">Admin Dashboard</Link>
+          </li>
+        )}
+
+        {props.isAuthenticated && (
+          <li className={classes.navItem}>
+            <Link to="/userDashboard">User Dashboard</Link>
+          </li>
+        )}
+        {!props.isAuthenticated && (
+          <li className={classes.navItem}>
+            <Link to="/register">Register</Link>
+          </li>
+        )}
+        {!props.isAuthenticated && (
+          <li className={classes.navItem}>
+            <Link to="/login">Login</Link>
+          </li>
+        )}
+
+        {props.isAuthenticated && (
+          <li className={classes.navItem}>
+            <a onClick={logoutHelper}>Logout</a>
+          </li>
+        )}
       </nav>
     </div>
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    role: state.auth.user.role,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     isAuthenticatedCheck: () => dispatch(action.checkAuthStatus()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
