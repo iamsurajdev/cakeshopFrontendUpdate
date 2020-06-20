@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import authReducer from "./Redux/Reducers/auth";
 import productsReducer from "./Redux/Reducers/Products";
 import cartReducer from "./Redux/Reducers/Cart";
+import categoryReducer from "./Redux/Reducers/Category";
 
 // const composeEnhancers =
 //   process.env.NODE_ENV === "development"
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
   cart: cartReducer,
+  category: categoryReducer,
 });
 
 const store = createStore(

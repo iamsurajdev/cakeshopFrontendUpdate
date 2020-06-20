@@ -27,13 +27,6 @@ const Login = (props) => {
     setUser({ ...user, [name]: event.target.value });
   };
 
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  // };
-  // const responseFacebook = (response) => {
-  //   console.log(response);
-  // };
-
   return (
     <BaseComponent>
       {props.authError && <p>{props.authError}</p>}
@@ -50,21 +43,6 @@ const Login = (props) => {
         />
         <button>Login</button>
       </form>
-      {/* for future */}
-      {/* <GoogleLogin
-        clientId=""
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-      <FacebookLogin
-        appId=""
-        autoLoad={true}
-        fields="name,email,picture"
-        callback={responseFacebook}
-        onClick={responseFacebook}
-      /> */}
     </BaseComponent>
   );
 };

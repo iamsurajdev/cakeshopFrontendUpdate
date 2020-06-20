@@ -12,3 +12,8 @@ export const PRODUCT_FETCH_NOT_NEEDED = "PRODUCT_FETCH_NOT_NEEDED";
 
 //Cart action types
 export const CART_RELOADED = "CART_RELOADED";
+
+//Category action types
+export const ADD_CATEGORY_START = "ADD_CATEGORY_START";
+export const ADD_CATEGORY_SUCCESS = "ADD_CATEGORY_SUCCESS";
+export const ADD_CATEGORY_FAIL = "ADD_CATEGORY_FAIL";
