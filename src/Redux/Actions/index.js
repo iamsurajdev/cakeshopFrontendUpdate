@@ -4,4 +4,10 @@ export { productFetch } from "./Products";
 
 export { reloadCart } from "./Cart";
 
-export { categoryFetch } from "./Category";
+export {
+  categoryPost,
+  categoryFetch,
+  categoryDelete,
+  setIdForUpdate,
+  categoryUpdate,
+} from "./Category";

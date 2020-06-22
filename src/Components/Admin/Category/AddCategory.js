@@ -37,7 +37,7 @@ const AddCategory = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmitCategory: (category, userId, token) =>
-      dispatch(action.categoryFetch(category, userId, token)),
+      dispatch(action.categoryPost(category, userId, token)),
   };
 };
 
