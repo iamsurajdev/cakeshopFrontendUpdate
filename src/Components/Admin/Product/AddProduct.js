@@ -24,6 +24,7 @@ const AddProduct = (props) => {
 
   const onSubmit = (event) => {
     console.log("ONSUBMIT");
+    console.log(formData);
 
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });

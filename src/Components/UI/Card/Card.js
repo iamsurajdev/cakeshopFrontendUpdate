@@ -7,6 +7,7 @@ import {
   removeItemFromCart,
 } from "../../Cart/CartHelper/CartHelper";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Card = (props) => {
   const addToCart = () => {
@@ -35,6 +36,36 @@ const Card = (props) => {
       )
     );
   };
+  const updateProduct = () => {
+    return (
+      props.updateProduct && (
+        <Link to="/admin/dashboard/updateProduct">
+          <button
+            onClick={() => {
+              props.setIdForUpdateProduct(props.product._id);
+            }}
+          >
+            Update Product
+          </button>
+        </Link>
+      )
+    );
+  };
+  const deleteProduct = () => {
+    return (
+      props.deleteProduct && (
+        <button
+          onClick={() => {
+            const userId = localStorage.getItem("userId");
+            const token = localStorage.getItem("token");
+            props.onDeleteProduct(props.product._id, userId, token);
+          }}
+        >
+          Delete Product
+        </button>
+      )
+    );
+  };
 
   return (
     <div className={classes.card}>
@@ -51,6 +82,8 @@ const Card = (props) => {
 
       {showAddToCart()}
       {showRemoveFromCart()}
+      {updateProduct()}
+      {deleteProduct()}
     </div>
   );
 };
@@ -64,6 +97,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onRemoveItemReload: () => dispatch(action.reloadCart()),
+    setIdForUpdateProduct: (id) => dispatch(action.setIdForUpdateProduct(id)),
+    onDeleteProduct: (productId, userId, token) =>
+      dispatch(action.productDelete(productId, userId, token)),
   };
 };
 

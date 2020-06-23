@@ -18,7 +18,13 @@ const Allproducts = (props) => {
   if (props.product) {
     view = props.product.map((prod, index) => (
       <div key={index}>
-        <Card product={prod} addtoCart={true} removeFromCart={false} />
+        <Card
+          product={prod}
+          addtoCart={true}
+          removeFromCart={false}
+          updateProduct={false}
+          deleteProduct={false}
+        />
       </div>
     ));
   }

@@ -47,3 +47,54 @@ export const productFetch = (product) => {
     }
   };
 };
+
+//this part for deleting data
+
+export const productDeleteStart = () => {
+  return {
+    type: actionTypes.PRODUCT_DELETE_START,
+  };
+};
+export const productDeleteSuccess = () => {
+  return {
+    type: actionTypes.PRODUCT_DELETE_SUCCESS,
+  };
+};
+
+export const productDeleteFail = (error) => {
+  return {
+    type: actionTypes.PRODUCT_DELETE_FAIL,
+    error: error,
+  };
+};
+
+export const productDelete = (productId, userId, token) => {
+  return (dispatch) => {
+    dispatch(productDeleteStart());
+    axios
+      .delete(`/product/${productId}/${userId}`, {
+        headers: {
+          token: token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.error) {
+          dispatch(productDeleteFail(response.data.error));
+        } else {
+          dispatch(productDeleteSuccess());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(productDeleteFail(err));
+      });
+  };
+};
+
+export const setIdForUpdateProduct = (id) => {
+  return {
+    type: actionTypes.SET_ID_FOR_UPDATE_PRODUCT,
+    id: id,
+  };
+};

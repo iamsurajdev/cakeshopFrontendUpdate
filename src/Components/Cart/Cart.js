@@ -31,7 +31,11 @@ const Cart = (props) => {
 
   return (
     <BaseComponent>
-      {products.length > 0 ? loadAllProducts() : <h3>No products found</h3>}
+      {localStorage.getItem("cart") ? (
+        loadAllProducts()
+      ) : (
+        <h3>No products found</h3>
+      )}
     </BaseComponent>
   );
 };
