@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../Redux/Actions/index";
 import Spinner from "../UI/Spinner/Spinner";
@@ -7,6 +7,16 @@ import Card from "../UI/Card/Card";
 
 import classes from "./Allproducts.module.css";
 const Allproducts = (props) => {
+  const [value, setValue] = useState({
+    search: "",
+  });
+
+  const { search } = value;
+
+  onchange = (e) => {
+    setValue({ search: e.target.value });
+  };
+
   const getProductsHelper = () => {
     props.getProducts(props.product);
   };
@@ -14,9 +24,13 @@ const Allproducts = (props) => {
     getProductsHelper();
   }, []);
 
+  const filteredProducts = props.product.filter((prod) => {
+    return prod.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  });
+
   let view = <Spinner />;
   if (props.product) {
-    view = props.product.map((prod, index) => (
+    view = filteredProducts.map((prod, index) => (
       <div key={index}>
         <Card
           product={prod}
@@ -31,6 +45,7 @@ const Allproducts = (props) => {
 
   return (
     <BaseComponent>
+      <input placeholder="Search" onChange={onchange} />
       <div className={classes.allProducts}>{view}</div>
     </BaseComponent>
   );
