@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Card.module.css";
 import ImageHelper from "./ImageHelper/ImageHelper";
 import * as action from "../../../Redux/Actions/index";
@@ -8,8 +8,11 @@ import {
 } from "../../Cart/CartHelper/CartHelper";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Modal from "react-modal";
 
 const Card = (props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const addToCart = () => {
     if (props.isAuthenticated) {
       addItemToCart(props.product);
@@ -66,25 +69,49 @@ const Card = (props) => {
       )
     );
   };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  console.log("isModalOpen" + isModalOpen);
 
   return (
-    <div className={classes.card}>
-      <ImageHelper id={props.product._id} />
-      <p>
-        <strong>Name:</strong> {props.product.name}
-      </p>
-      <p>
-        <strong> Price:</strong> ${props.product.price}
-      </p>
-      <p>
-        <strong>Description: </strong> {props.product.description}
-      </p>
+    <React.Fragment>
+      <div
+        className={classes.card}
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
+      >
+        <ImageHelper id={props.product._id} />
+        <p>
+          <strong>Name:</strong> {props.product.name}
+        </p>
+        <p>
+          <strong> Price:</strong> ${props.product.price}
+        </p>
 
-      {showAddToCart()}
-      {showRemoveFromCart()}
-      {updateProduct()}
-      {deleteProduct()}
-    </div>
+        {showRemoveFromCart()}
+        {updateProduct()}
+        {deleteProduct()}
+      </div>
+      <Modal
+        style={{ width: "300px" }}
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        className={classes.modal}
+      >
+        <ImageHelper id={props.product._id} />
+        <h1>{props.product.name}</h1>
+        <p>
+          <strong>Description: </strong> {props.product.description}
+        </p>
+        <div>
+          <button onClick={closeModal}>Close</button>
+        </div>
+
+        {showAddToCart()}
+      </Modal>
+    </React.Fragment>
   );
 };
 

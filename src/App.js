@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Router from "./Router/Router";
 import { connect } from "react-redux";
 import * as action from "./Redux/Actions/index";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 class App extends Component {
   componentDidMount() {
     this.initialize();
   }
-
   initialize() {
     console.log("initialize executed");
 

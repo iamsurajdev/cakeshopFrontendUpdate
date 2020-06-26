@@ -4,8 +4,8 @@ import * as action from "../../Redux/Actions/index";
 import Spinner from "../UI/Spinner/Spinner";
 import BaseComponent from "../BaseComponent/BaseComponent";
 import Card from "../UI/Card/Card";
-
 import classes from "./Allproducts.module.css";
+
 const Allproducts = (props) => {
   const [value, setValue] = useState({
     search: "",
@@ -30,7 +30,7 @@ const Allproducts = (props) => {
       return prod.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     view = filteredProducts.map((prod, index) => (
-      <div key={index}>
+      <div className={classes.cardDiv} key={index}>
         <Card
           product={prod}
           addtoCart={true}

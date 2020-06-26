@@ -5,39 +5,40 @@ import { connect } from "react-redux";
 import Card from "../UI/Card/Card";
 
 const Cart = (props) => {
-  const [products, setProducts] = useState([0]);
+  const [products, setProducts] = useState();
 
   useEffect(() => {
     setProducts(loadCart());
   }, [props.reload]);
 
   const loadAllProducts = () => {
+    console.log(products);
+
     return (
       <div>
-        <h2>this section is to load products</h2>
-        {products.map((product, index) => {
-          return (
-            <Card
-              key={index}
-              product={product}
-              addtoCart={false}
-              removeFromCart={true}
-            />
-          );
-        })}
+        {products ? (
+          products.length > 0 ? (
+            products.map((product, index) => {
+              return (
+                <Card
+                  key={index}
+                  product={product}
+                  addtoCart={false}
+                  removeFromCart={true}
+                />
+              );
+            })
+          ) : (
+            <h3>No products found</h3>
+          )
+        ) : (
+          <h3>No products found</h3>
+        )}
       </div>
     );
   };
 
-  return (
-    <BaseComponent>
-      {localStorage.getItem("cart") ? (
-        loadAllProducts()
-      ) : (
-        <h3>No products found</h3>
-      )}
-    </BaseComponent>
-  );
+  return <BaseComponent>{loadAllProducts()}</BaseComponent>;
 };
 
 const mapStateToProps = (state) => {
