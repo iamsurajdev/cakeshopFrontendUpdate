@@ -2,6 +2,7 @@
   top: 0;
   width: 100%;
   opacity: 0.7;
+  filter: brightness(50%);
   z-index: -5;
   position: inherit;
 }
@@ -16,20 +17,9 @@
   top: 150px;
 }
 .heading h1 {
-  font-size: 60px;
-}
-
-@keyframes yourAnimation {
-  0% {
-    transform: scale(0.5) translateY(-30%);
-    opacity: 0.5;
-  }
-  89% {
-    transform: rotate(xx) scale(1) translateY(0);
-    opacity: 1;
-  }
-}
-
-.elementToAnimate {
-  animation: yourAnimation 0.5s infinite 0s linear;
+  color: #44aedf;
+  margin: 0;
+  font-size: 80px;
+  text-shadow: 2px 2px 8px #413f3f;
+  animation: yourAnimation 0.5s ease-in 0s linear;
 }

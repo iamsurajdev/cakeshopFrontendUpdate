@@ -1,6 +1,6 @@
 import React from "react";
 import BaseComponent from "../BaseComponent/BaseComponent";
-import image from "../../Assets/Images/cake-baby.jpg";
+import image from "../../Assets/Images/muffins.jpg";
 import classes from "./Home.module.css";
 
 const Home = (props) => {

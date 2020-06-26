@@ -1,9 +1,8 @@
 import * as actionType from "../Actions/actionTypes";
 import { updateObject } from "../utility";
-import { productDelete } from "../Actions";
 
 const initialState = {
-  products: [],
+  products: null,
   error: false,
   reload: true,
   idForUpdate: null,
@@ -21,7 +20,7 @@ const productFetchNotNeeded = (state, action) => {
 };
 const productFetchSuccess = (state, action) => {
   return updateObject(state, {
-    products: state.products.concat(action.product),
+    products: action.product,
   });
 };
 const productFetchFail = (state, action) => {
@@ -34,10 +33,11 @@ const productDeleteStart = (state, action) => {
     error: false,
   });
 };
+
 const productDeleteSuccess = (state, action) => {
   return updateObject(state, {
     error: false,
-    products: [],
+    products: null,
     reload: !state.reload,
   });
 };

@@ -3,18 +3,23 @@ import { Link } from "react-router-dom";
 import classes from "./Header.module.css";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons";
 
 const Header = (props) => {
   const logoutHelper = () => {
     localStorage.clear();
     props.isAuthenticatedCheck();
   };
+
   return (
     <div className={classes.header}>
+      <div className={classes.logo}>
+        <Link to="/">
+          <FontAwesomeIcon icon={faBirthdayCake} />
+        </Link>
+      </div>
       <nav className={classes.navigation}>
-        <li className={classes.navItem}>
-          <Link to="/">Home</Link>
-        </li>
         <li className={classes.navItem}>
           <Link to="/products">Products</Link>
         </li>

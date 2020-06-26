@@ -30,21 +30,21 @@ export const productFetchNotNeeded = () => {
 export const productFetch = (product) => {
   return (dispatch) => {
     dispatch(productFetchStart());
-    if (product.length > 0) {
-      dispatch(productFetchNotNeeded());
-    } else {
-      axios
-        .get("/products")
-        .then((response) => {
-          console.log(response);
 
+    axios
+      .get("/products")
+      .then((response) => {
+        console.log(response);
+        if (product !== response.data) {
           dispatch(productFetchSuccess(response.data));
-        })
-        .catch((err) => {
-          console.log(err);
-          dispatch(productFetchFail(err));
-        });
-    }
+        } else {
+          dispatch(productFetchNotNeeded());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(productFetchFail(err));
+      });
   };
 };
 
@@ -55,9 +55,10 @@ export const productDeleteStart = () => {
     type: actionTypes.PRODUCT_DELETE_START,
   };
 };
-export const productDeleteSuccess = () => {
+export const productDeleteSuccess = (id) => {
   return {
     type: actionTypes.PRODUCT_DELETE_SUCCESS,
+    id: id,
   };
 };
 
@@ -82,7 +83,7 @@ export const productDelete = (productId, userId, token) => {
         if (response.data.error) {
           dispatch(productDeleteFail(response.data.error));
         } else {
-          dispatch(productDeleteSuccess());
+          dispatch(productDeleteSuccess(response.data.deletedProduct._id));
         }
       })
       .catch((err) => {

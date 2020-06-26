@@ -24,12 +24,11 @@ const Allproducts = (props) => {
     getProductsHelper();
   }, []);
 
-  const filteredProducts = props.product.filter((prod) => {
-    return prod.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-  });
-
   let view = <Spinner />;
   if (props.product) {
+    const filteredProducts = props.product.filter((prod) => {
+      return prod.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
     view = filteredProducts.map((prod, index) => (
       <div key={index}>
         <Card
