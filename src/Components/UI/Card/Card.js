@@ -9,6 +9,8 @@ import {
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Card = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,15 +74,16 @@ const Card = (props) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
   console.log("isModalOpen" + isModalOpen);
 
   return (
     <React.Fragment>
       <div
         className={classes.card}
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
+        onClick={props.addtoCart ? openModal : null}
       >
         <ImageHelper id={props.product._id} />
         <p>
@@ -100,16 +103,16 @@ const Card = (props) => {
         onRequestClose={closeModal}
         className={classes.modal}
       >
+        <div className={classes.modalCloseDiv} onClick={closeModal}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </div>
         <ImageHelper id={props.product._id} />
         <h1>{props.product.name}</h1>
         <p>
           <strong>Description: </strong> {props.product.description}
         </p>
-        <div>
-          <button onClick={closeModal}>Close</button>
-        </div>
 
-        {showAddToCart()}
+        <div className={classes.addToCartButtonDiv}>{showAddToCart()}</div>
       </Modal>
     </React.Fragment>
   );
