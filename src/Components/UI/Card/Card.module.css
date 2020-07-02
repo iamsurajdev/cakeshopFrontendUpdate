@@ -12,14 +12,20 @@
 }
 
 .modal {
-  max-width: 70vw;
+  max-width: 60vw;
   margin: auto;
   margin-top: 15vh;
   margin-bottom: 15vh;
-
+  border: 2px solid #888888;
   background-color: #f5f5f5;
   overflow-y: scroll;
   max-height: 65%;
+}
+
+@media screen and (min-width: 720px) {
+  .modal {
+    max-width: 40vw;
+  }
 }
 
 .addToCartButtonDiv {
@@ -27,19 +33,7 @@
   width: 100%;
 }
 
-.modalCloseDiv {
-  height: fit-content;
-  width: fit-content;
-  cursor: pointer;
-  position: absolute;
-  z-index: 10;
-  margin-left: 5px;
-  margin-top: 5px;
-  border-radius: 50%;
-  font-size: 3vw;
-  padding: 0 3px;
-  box-shadow: 0 0 10px #aa9c9c;
-}
-.modalCloseDiv:hover {
-  box-shadow: 0 0 10px #4d4848;
+.updateLink {
+  text-decoration: none;
+  color: inherit;
 }

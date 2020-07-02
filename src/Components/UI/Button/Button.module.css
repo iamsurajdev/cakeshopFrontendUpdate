@@ -1,0 +1,55 @@
+.Button {
+  margin-top: 5px;
+  display: block;
+  height: 2rem;
+  margin: auto;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* ////////////////////////////////////////////////// */
+
+.danger {
+  background-color: rgb(228, 41, 41);
+  color: white;
+}
+.danger:hover {
+  background-color: rgb(241, 240, 240);
+  color: rgb(228, 41, 41);
+  font-weight: bold;
+}
+/* ////////////////////////////////////////////////// */
+
+.success {
+  background-color: rgb(31, 180, 43);
+  color: white;
+}
+.success:hover {
+  background-color: rgb(241, 240, 240);
+  color: rgb(31, 180, 43);
+  font-weight: bold;
+}
+/* ////////////////////////////////////////////////// */
+
+.warning {
+  background-color: rgb(65, 105, 216);
+  color: white;
+}
+
+.warning:hover {
+  background-color: rgb(241, 240, 240);
+  color: rgb(65, 105, 216);
+  font-weight: bold;
+}
+/* ////////////////////////////////////////////////// */
+
+.neutral {
+  background-color: rgb(241, 150, 30);
+  color: white;
+}
+
+.neutral:hover {
+  background-color: rgb(241, 240, 240);
+  color: rgb(241, 150, 30);
+  font-weight: bold;
+}

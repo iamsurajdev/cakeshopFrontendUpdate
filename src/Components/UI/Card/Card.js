@@ -10,14 +10,12 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  Button,
   Typography,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Button from "../Button/Button";
 
 const CardComponent = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,34 +29,51 @@ const CardComponent = (props) => {
   };
 
   const showAddToCart = () => {
-    return props.addtoCart && <button onClick={addToCart}>Add to Cart</button>;
+    return (
+      props.addtoCart && (
+        <Button
+          btnType="success"
+          clicked={() => {
+            addToCart();
+            closeModal();
+          }}
+        >
+          Add to Cart
+        </Button>
+      )
+    );
   };
 
   const showRemoveFromCart = () => {
     return (
       props.removeFromCart && (
-        <button
-          onClick={() => {
+        <Button
+          btnType="neutral"
+          clicked={() => {
             removeItemFromCart(props.product._id);
             props.onRemoveItemReload();
           }}
         >
           Remove from cart
-        </button>
+        </Button>
       )
     );
   };
   const updateProduct = () => {
     return (
       props.updateProduct && (
-        <Link to="/admin/dashboard/updateProduct">
-          <button
-            onClick={() => {
+        <Link
+          className={classes.updateLink}
+          to="/admin/dashboard/updateProduct"
+        >
+          <Button
+            btnType="warning"
+            clicked={() => {
               props.setIdForUpdateProduct(props.product._id);
             }}
           >
             Update Product
-          </button>
+          </Button>
         </Link>
       )
     );
@@ -66,15 +81,16 @@ const CardComponent = (props) => {
   const deleteProduct = () => {
     return (
       props.deleteProduct && (
-        <button
-          onClick={() => {
+        <Button
+          btnType="danger"
+          clicked={() => {
             const userId = localStorage.getItem("userId");
             const token = localStorage.getItem("token");
             props.onDeleteProduct(props.product._id, userId, token);
           }}
         >
           Delete Product
-        </button>
+        </Button>
       )
     );
   };
@@ -93,14 +109,7 @@ const CardComponent = (props) => {
         onClick={props.addtoCart ? openModal : null}
       >
         <CardActionArea>
-          <ImageHelper id={props.product._id} />
-          {/* <p>
-            <strong>Name:</strong> {props.product.name}
-          </p>
-          <p>
-            <strong> Price:</strong> ${props.product.price}
-          </p> */}
-
+          <ImageHelper id={props.product._id} size="150" />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
               <strong>Name:</strong> {props.product.name}
@@ -120,10 +129,9 @@ const CardComponent = (props) => {
         onRequestClose={closeModal}
         className={classes.modal}
       >
-        <div className={classes.modalCloseDiv} onClick={closeModal}>
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </div>
-        <ImageHelper id={props.product._id} />
+        <CardActionArea>
+          <ImageHelper id={props.product._id} size="250" />
+        </CardActionArea>
         <h1>{props.product.name}</h1>
         <p>
           <strong>Description: </strong> {props.product.description}

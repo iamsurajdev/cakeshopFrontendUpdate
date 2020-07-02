@@ -9,7 +9,7 @@ const ImageHelper = (props) => {
     <CardMedia
       component="img"
       alt="Contemplative Reptile"
-      height="150"
+      height={props.size}
       image={Url}
       title="Contemplative Reptile"
     />

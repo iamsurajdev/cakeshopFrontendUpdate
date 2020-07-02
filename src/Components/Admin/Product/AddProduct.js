@@ -17,6 +17,18 @@ const AddProduct = (props) => {
     formData: "",
   });
 
+  const {
+    name,
+    description,
+    price,
+    stock,
+
+    category,
+    error,
+    createdProduct,
+    formData,
+  } = values;
+
   useEffect(() => {
     props.onInitCategory();
     setValues({ ...values, formData: new FormData() });
@@ -55,18 +67,6 @@ const AddProduct = (props) => {
         }
       });
   };
-
-  const {
-    name,
-    description,
-    price,
-    stock,
-
-    category,
-    error,
-    createdProduct,
-    formData,
-  } = values;
 
   const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
