@@ -1,9 +1,8 @@
 .card {
   width: 200px;
   height: 300px;
-  border: 2px solid #9c2e2e;
+
   margin: 5px 10px;
-  box-shadow: none;
   transition: 0.3s;
 }
 
@@ -13,12 +12,14 @@
 }
 
 .modal {
-  width: 60vh;
+  max-width: 70vw;
   margin: auto;
   margin-top: 15vh;
+  margin-bottom: 15vh;
+
   background-color: #f5f5f5;
   overflow-y: scroll;
-  max-height: 85%;
+  max-height: 65%;
 }
 
 .addToCartButtonDiv {

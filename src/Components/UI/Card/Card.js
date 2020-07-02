@@ -6,13 +6,20 @@ import {
   addItemToCart,
   removeItemFromCart,
 } from "../../Cart/CartHelper/CartHelper";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Button,
+  Typography,
+} from "@material-ui/core";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-const Card = (props) => {
+const CardComponent = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addToCart = () => {
@@ -81,22 +88,32 @@ const Card = (props) => {
 
   return (
     <React.Fragment>
-      <div
+      <Card
         className={classes.card}
         onClick={props.addtoCart ? openModal : null}
       >
-        <ImageHelper id={props.product._id} />
-        <p>
-          <strong>Name:</strong> {props.product.name}
-        </p>
-        <p>
-          <strong> Price:</strong> ${props.product.price}
-        </p>
+        <CardActionArea>
+          <ImageHelper id={props.product._id} />
+          {/* <p>
+            <strong>Name:</strong> {props.product.name}
+          </p>
+          <p>
+            <strong> Price:</strong> ${props.product.price}
+          </p> */}
 
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              <strong>Name:</strong> {props.product.name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              <strong> Price:</strong> ${props.product.price}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
         {showRemoveFromCart()}
         {updateProduct()}
         {deleteProduct()}
-      </div>
+      </Card>
       <Modal
         style={{ width: "300px" }}
         isOpen={isModalOpen}
@@ -133,4 +150,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, mapDispatchToProps)(CardComponent);

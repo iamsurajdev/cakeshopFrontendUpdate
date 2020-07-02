@@ -3,6 +3,7 @@ import { loadCart } from "./CartHelper/CartHelper";
 import BaseComponent from "../BaseComponent/BaseComponent";
 import { connect } from "react-redux";
 import Card from "../UI/Card/Card";
+import { Grid } from "@material-ui/core";
 
 const Cart = (props) => {
   const [products, setProducts] = useState();
@@ -15,17 +16,18 @@ const Cart = (props) => {
     console.log(products);
 
     return (
-      <div>
+      <Grid container justify="center">
         {products ? (
           products.length > 0 ? (
             products.map((product, index) => {
               return (
-                <Card
-                  key={index}
-                  product={product}
-                  addtoCart={false}
-                  removeFromCart={true}
-                />
+                <Grid key={index} item>
+                  <Card
+                    product={product}
+                    addtoCart={false}
+                    removeFromCart={true}
+                  />
+                </Grid>
               );
             })
           ) : (
@@ -34,7 +36,7 @@ const Cart = (props) => {
         ) : (
           <h3>No products found</h3>
         )}
-      </div>
+      </Grid>
     );
   };
 

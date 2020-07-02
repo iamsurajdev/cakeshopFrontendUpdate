@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
 import BaseComponent from "../../BaseComponent/BaseComponent";
 import * as action from "../../../Redux/Actions/index";
 import Card from "../../UI/Card/Card";
@@ -18,18 +19,7 @@ const ManageProduct = (props) => {
   if (props.product) {
     manageProductBody = props.product.map((prod, index) => {
       return (
-        <div key={index}>
-          {/* // if i don't use photos then this ia a better option rather pass it thorough Card  */}
-          {/* <h1>{prod.name}</h1>
-          <button
-            onClick={() => {
-              const userId = localStorage.getItem("userId");
-              const token = localStorage.getItem("token");
-              props.onDeleteProduct(prod._id, userId, token);
-            }}
-          >
-            Delete
-          </button> */}
+        <Grid key={index} item>
           <Card
             product={prod}
             addtoCart={false}
@@ -37,12 +27,18 @@ const ManageProduct = (props) => {
             updateProduct={true}
             deleteProduct={true}
           />
-        </div>
+        </Grid>
       );
     });
   }
 
-  return <BaseComponent>{manageProductBody}</BaseComponent>;
+  return (
+    <BaseComponent>
+      <Grid container justify="center">
+        {manageProductBody}
+      </Grid>
+    </BaseComponent>
+  );
 };
 
 const mapStateToProps = (state) => {

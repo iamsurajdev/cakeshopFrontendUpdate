@@ -4,8 +4,8 @@ import * as action from "../../Redux/Actions/index";
 import Spinner from "../UI/Spinner/Spinner";
 import BaseComponent from "../BaseComponent/BaseComponent";
 import Card from "../UI/Card/Card";
+import { Grid } from "@material-ui/core";
 import classes from "./Allproducts.module.css";
-
 const Allproducts = (props) => {
   const [value, setValue] = useState({
     search: "",
@@ -30,7 +30,7 @@ const Allproducts = (props) => {
       return prod.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     view = filteredProducts.map((prod, index) => (
-      <div className={classes.cardDiv} key={index}>
+      <Grid key={index} item>
         <Card
           product={prod}
           addtoCart={true}
@@ -38,14 +38,20 @@ const Allproducts = (props) => {
           updateProduct={false}
           deleteProduct={false}
         />
-      </div>
+      </Grid>
     ));
   }
 
   return (
     <BaseComponent>
-      <input placeholder="Search" onChange={onchange} />
-      <div className={classes.allProducts}>{view}</div>
+      <input
+        className={classes.searchBox}
+        placeholder="Search"
+        onChange={onchange}
+      />
+      <Grid container justify="center">
+        {view}
+      </Grid>
     </BaseComponent>
   );
 };

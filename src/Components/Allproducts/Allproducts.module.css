@@ -1,4 +1,13 @@
-.allProducts {
-  display: flex;
-  flex-wrap: wrap;
+.searchBox {
+  display: block;
+  margin: 20px auto;
+  width: fit-content;
+  min-width: 200px;
+  height: 4vh;
+  border: 0;
+  border-bottom: 2px solid rgb(46, 125, 230);
+}
+
+.searchBox:focus {
+  outline: none;
 }
