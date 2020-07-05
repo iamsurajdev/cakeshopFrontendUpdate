@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
 import BaseComponent from "../../BaseComponent/BaseComponent";
-// import { GoogleLogin } from "react-google-login";
-// import FacebookLogin from "react-facebook-login";
+// import { Formik } from "formik";
+// import * as EmailValidator from "email-validator";
+// import * as Yup from "yup";
 
 const Login = (props) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  // const [validate, setValidate] = useState({
+  //   emailError: "",
+  //   passwordError: "",
+  // });
 
   // De-structuring the state
   const { email, password } = user;
@@ -18,13 +24,21 @@ const Login = (props) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     console.log(user);
-
     props.onLogin(null, email, password);
   };
 
   //set the form data to the local state
   const handleChange = (name) => (event) => {
     setUser({ ...user, [name]: event.target.value });
+
+    // this is for validation but not completed yet
+    // if (name === "email") {
+    //   if (!event.target.value.match("@") && !event.target.value.match(".")) {
+    //     setValidate({ ...validate, emailError: "Please enter a valid E-mail" });
+    //   }
+    // }
+
+    // console.log(validate.emailError);
   };
 
   return (
@@ -35,11 +49,14 @@ const Login = (props) => {
           onChange={handleChange("email")}
           value={email}
           placeholder="e-mail"
+          name="email"
         />
+        <div>{validate.emailError && <p>{validate.emailError}</p>}</div>
         <input
           onChange={handleChange("password")}
           value={password}
           placeholder="Password"
+          name="password"
         />
         <button>Login</button>
       </form>
