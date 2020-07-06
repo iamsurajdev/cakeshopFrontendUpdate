@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
 import BaseComponent from "../../BaseComponent/BaseComponent";
@@ -12,13 +12,18 @@ const Login = (props) => {
     password: "",
   });
 
-  // const [validate, setValidate] = useState({
-  //   emailError: "",
-  //   passwordError: "",
-  // });
+  const [validate, setValidate] = useState({
+    emailError: "",
+    passwordError: "",
+    isValidate: true,
+  });
 
   // De-structuring the state
   const { email, password } = user;
+
+  useEffect(() => {
+    props.onInitRemoveError();
+  }, []);
 
   // Form submit handler
   const onSubmitHandler = (event) => {
@@ -32,19 +37,36 @@ const Login = (props) => {
     setUser({ ...user, [name]: event.target.value });
 
     // this is for validation but not completed yet
-    // if (name === "email") {
-    //   if (!event.target.value.match("@") && !event.target.value.match(".")) {
-    //     setValidate({ ...validate, emailError: "Please enter a valid E-mail" });
-    //   }
-    // }
+    if (name === "email") {
+      if (!event.target.value.includes("@")) {
+        setValidate({
+          ...validate,
+          emailError: "Please enter a valid E-mail",
+          isValidate: false,
+        });
+      } else {
+        setValidate({ ...validate, emailError: "", isValidate: true });
+      }
+    }
+    if (name === "password") {
+      if (event.target.value.length < 6) {
+        setValidate({
+          ...validate,
+          passwordError: "Password should be more than 6 correctors",
+          isValidate: false,
+        });
+      } else {
+        setValidate({ ...validate, passwordError: "", isValidate: true });
+      }
+    }
 
-    // console.log(validate.emailError);
+    console.log(validate.emailError);
   };
 
   return (
     <BaseComponent>
       {props.authError && <p>{props.authError}</p>}
-      <form onSubmit={onSubmitHandler}>
+      <form>
         <input
           onChange={handleChange("email")}
           value={email}
@@ -58,7 +80,13 @@ const Login = (props) => {
           placeholder="Password"
           name="password"
         />
-        <button>Login</button>
+        <div>{validate.passwordError && <p>{validate.passwordError}</p>}</div>
+        <button
+          disabled={validate.isValidate && password && email ? false : true}
+          onClick={onSubmitHandler}
+        >
+          Login
+        </button>
       </form>
     </BaseComponent>
   );
@@ -74,6 +102,7 @@ const mapStateToProps = (state) => {
 //dispatch action to redux
 const mapDispatchToProps = (dispatch) => {
   return {
+    onInitRemoveError: () => dispatch(action.clearAuthErrorOnInit()),
     onLogin: (name, email, password) =>
       dispatch(action.auth(name, email, password)),
   };

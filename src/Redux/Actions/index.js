@@ -1,4 +1,9 @@
-export { auth, checkAuthStatus, fetchUserIfLoggedIn } from "./auth";
+export {
+  auth,
+  checkAuthStatus,
+  fetchUserIfLoggedIn,
+  clearAuthErrorOnInit,
+} from "./auth";
 
 export { productFetch, productDelete, setIdForUpdateProduct } from "./Products";
 

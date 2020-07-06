@@ -3,6 +3,7 @@ export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_STATUS = "AUTH_STATUS";
+export const CLEAR_ERROR_ON_INIT = "CLEAR_ERROR_ON_INIT";
 
 //Products action types
 export const PRODUCT_FETCH_START = "PRODUCT_FETCH_START";

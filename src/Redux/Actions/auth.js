@@ -129,3 +129,7 @@ export const checkAuthStatus = () => {
     }
   };
 };
+
+export const clearAuthErrorOnInit = () => {
+  return { type: actionTypes.CLEAR_ERROR_ON_INIT, error: null };
+};

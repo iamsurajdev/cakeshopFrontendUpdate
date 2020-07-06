@@ -40,6 +40,11 @@ const authStatus = (state, action) => {
     isAuthenticated: action.isAuthenticated,
   });
 };
+const clearAuthErrorOnInit = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+  });
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -51,6 +56,8 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionType.AUTH_STATUS:
       return authStatus(state, action);
+    case actionType.CLEAR_ERROR_ON_INIT:
+      return clearAuthErrorOnInit(state, action);
 
     default:
       return state;
