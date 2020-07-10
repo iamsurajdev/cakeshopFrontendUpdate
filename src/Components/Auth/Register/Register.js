@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
 import BaseComponent from "../../BaseComponent/BaseComponent";
+import classes from "./Register.module.css";
 const Register = (props) => {
   //local state for store the event before sending to redux
   const [user, setUser] = useState({
@@ -31,6 +32,7 @@ const Register = (props) => {
       {props.authError && <p>{props.authError}</p>}
       <form onSubmit={onSubmitHandler}>
         <input
+          className={classes.inputFiled}
           onChange={handleChange("name")}
           value={name}
           placeholder="name"

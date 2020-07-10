@@ -1,0 +1,61 @@
+.main {
+  height: 400px;
+  width: 500px;
+  margin: auto;
+  box-shadow: 0px 0px 20px 5px #c1c1c1;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+.form {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+.inputFiled {
+  border: 1px solid rgb(172, 170, 170);
+  border-radius: 3px;
+  padding: 10px;
+  width: 250px;
+  height: auto;
+  margin: auto;
+}
+
+.inputDiv {
+  height: 60px;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.inputDiv p {
+  color: rgb(163, 29, 29);
+  font-size: 14px;
+}
+
+.loginButton {
+  margin: auto;
+  font-size: 17px;
+  color: white;
+
+  padding: 5px 10px;
+  width: 150px;
+  background-color: rgb(90, 146, 88);
+}
+
+.loginError {
+  border: 1px solid red;
+  font-size: 16px;
+  color: rgb(155, 33, 33);
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+}

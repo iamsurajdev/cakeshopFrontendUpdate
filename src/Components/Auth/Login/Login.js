@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/index";
 import BaseComponent from "../../BaseComponent/BaseComponent";
+import classes from "./Login.module.css";
 // import { Formik } from "formik";
 // import * as EmailValidator from "email-validator";
 // import * as Yup from "yup";
@@ -65,29 +66,46 @@ const Login = (props) => {
 
   return (
     <BaseComponent>
-      {props.authError && <p>{props.authError}</p>}
-      <form>
-        <input
-          onChange={handleChange("email")}
-          value={email}
-          placeholder="e-mail"
-          name="email"
-        />
-        <div>{validate.emailError && <p>{validate.emailError}</p>}</div>
-        <input
-          onChange={handleChange("password")}
-          value={password}
-          placeholder="Password"
-          name="password"
-        />
-        <div>{validate.passwordError && <p>{validate.passwordError}</p>}</div>
-        <button
-          disabled={validate.isValidate && password && email ? false : true}
-          onClick={onSubmitHandler}
-        >
-          Login
-        </button>
-      </form>
+      <div className={classes.main}>
+        <div className={classes.content}>
+          <h1>Login Fom</h1>
+          {props.authError && (
+            <p className={classes.loginError}>{props.authError}</p>
+          )}
+          <form className={classes.form}>
+            <div className={classes.inputDiv}>
+              <input
+                className={classes.inputFiled}
+                onChange={handleChange("email")}
+                value={email}
+                type="text"
+                placeholder="e-mail"
+                name="email"
+              />
+              {validate.emailError && <p>{validate.emailError}</p>}
+            </div>
+            <div className={classes.inputDiv}>
+              <input
+                className={classes.inputFiled}
+                onChange={handleChange("password")}
+                value={password}
+                type="password"
+                placeholder="Password"
+                name="password"
+              />
+
+              {validate.passwordError && <p>{validate.passwordError}</p>}
+            </div>
+            <button
+              className={classes.loginButton}
+              disabled={validate.isValidate && password && email ? false : true}
+              onClick={onSubmitHandler}
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
     </BaseComponent>
   );
 };
