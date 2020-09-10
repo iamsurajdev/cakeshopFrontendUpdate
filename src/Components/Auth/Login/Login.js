@@ -79,7 +79,7 @@ const Login = (props) => {
                 onChange={handleChange("email")}
                 value={email}
                 type="text"
-                placeholder="e-mail"
+                placeholder="E-mail"
                 name="email"
               />
               {validate.emailError && <p>{validate.emailError}</p>}
